@@ -1,0 +1,43 @@
+<div id="content">
+    <mat-card>
+      <h1>Keys</h1>
+        <form class="form" (ngSubmit)="onSubmit(c)" #c="ngForm" >
+        <mat-form-field class="example-full-width" id="content1">
+          <input matInput placeholder="private key" id="privatekey" name="privatekey"  [(ngModel)]="privatekey" ngModel required>
+        </mat-form-field>
+
+        <br />
+        <button mat-raised-button type="submit" [disabled]="c.invalid">Submit</button>
+  
+      </form>
+    </mat-card>
+  </div>
+  <div id="content" *ngIf="show">
+    <mat-card>
+      <h4>Publickey:{{publickey}}</h4>
+      <h4>Address:{{address}}</h4>
+    </mat-card>
+  </div>
+
+  <div id="content">
+    <mat-card>
+      <h1>Mint</h1>
+        <form class="form" (ngSubmit)="onSub(f)" #f="ngForm" >
+        <mat-form-field class="example-full-width" id="content1">
+          <input matInput placeholder="zkassetaddress" id="zkassetaddress" name="zkassetaddress"  [(ngModel)]="zkassetaddress" ngModel required>
+        </mat-form-field>
+
+        <br />
+        <mat-form-field class="example-full-width" id="content1">
+          <input matInput placeholder="name" id="name" name="name"  [(ngModel)]="name" ngModel required>
+        </mat-form-field>
+        <br/>
+        <mat-form-field class="example-full-width" id="content1">
+          <input matInput placeholder="name" id="name" name="name"  [(ngModel)]="name" ngModel required>
+        </mat-form-field>
+        <br/>
+        <button mat-raised-button type="submit" [disabled]="f.invalid">Submit</button>
+  
+      </form>
+    </mat-card>
+  </div>

@@ -1,0 +1,34 @@
+<div id="content">
+    <mat-card>
+      <h1>Joinsplit</h1>
+      </mat-card>
+</div>
+<div id="content">
+  <mat-card>
+   
+      <div class="table-responsive">
+      <table class="table table-bordered ">
+          <thead>
+            <tr>
+                  <th>Symbol</th>
+                  <th>AssetAddress</th>                      
+                  <th>Value</th>
+                  <th>Status</th>
+                  <th>Note_hash</th>
+                  <th>Buy</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of notehashArray">
+                 <td >{{data.symbol}}</td>
+                 <td>{{data.assetAddress}}</td> 
+                 <td>{{data.value}}</td>
+                 <td>{{data.status}}</td>    
+                 <td>{{data.note_hash}}</td>    
+                 <td><button mat-raised-button color="primary" (click)="openDialog(data)">Buy</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </mat-card>
+</div>
