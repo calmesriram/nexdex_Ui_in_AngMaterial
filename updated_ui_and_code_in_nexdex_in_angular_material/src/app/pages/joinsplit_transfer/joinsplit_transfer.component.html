@@ -1,0 +1,92 @@
+
+     
+        <div class="row">
+            <div class="col-md-6">
+                <div>
+                    <div class="add-title">                      
+                      <mat-card-title>JoinSplit</mat-card-title>
+                    </div>
+                    <div>
+                      <form autocomplete="off" [formGroup]="joinSplitForm" (change)="formChanged()">
+                        <!-- <mat-grid-list cols="2" [cols]="breakpoint" rowHeight="85px" (window:resize)="onResize($event)">
+                          <mat-grid-tile>
+                            <div class="text-inside"> -->
+                              <mat-form-field>
+                                <input matInput placeholder="Value" formControlName="value1" required>
+                                <mat-error *ngIf="joinSplitForm.controls.value1.hasError('required')">
+                                  Please enter value 
+                                </mat-error>
+                                <mat-error *ngIf="joinSplitForm.controls.value1.hasError('pattern')">
+                                  Please enter valid value 
+                                </mat-error>
+                              </mat-form-field>
+                            <!-- </div>
+                          </mat-grid-tile> -->
+                          <!-- <mat-grid-tile> -->
+                            <!-- <div class="text-inside"> -->
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="pubkey"  formControlName="pubkey" required>
+                                <mat-error *ngIf="joinSplitForm.controls.pubkey.hasError('required')">
+                                  Please enter pubkey
+                                </mat-error>
+                                <mat-error *ngIf="joinSplitForm.controls.pubkey.hasError('pattern')">
+                                  Please enter pubkey
+                                </mat-error>
+                              </mat-form-field>
+                            <!-- </div>
+                          </mat-grid-tile>
+                          <mat-grid-tile> -->
+                            <!-- <div class="text-inside"> -->
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="privatekey"  formControlName="privatekey" required>
+                                <mat-error *ngIf="joinSplitForm.controls.privatekey.hasError('required')">
+                                  Please enter privatekey
+                                </mat-error>
+                                <mat-error *ngIf="joinSplitForm.controls.privatekey.hasError('pattern')">
+                                  Please enter privatekey
+                                </mat-error>
+                              </mat-form-field>
+                            <!-- </div>
+                          </mat-grid-tile>
+                      
+                        </mat-grid-list> -->
+                        <br>
+                        
+                        <div class="btn-sec">
+                          <button mat-raised-button type="submit" color="primary" class="Update-btn" (click)="joinSplit()">Transfer</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                          <button mat-raised-button type="button" class="Discard-btn" (click)="cancelOption();">Cancel</button>
+                        </div>
+                        <mat-spinner strokeWidth="3" style="margin:0 auto;" [diameter]="20" *ngIf="loader"></mat-spinner> 
+                      </form>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-md-6" >
+                <div id="content">                   
+                    <mat-card>                     
+                        <div class="table-responsive">
+                        <table class="table table-bordered ">
+                            <thead>
+                              <tr>
+                                    <th>Value</th>
+                                    <th>Status</th>
+                                 
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let data of notehashArrayfordailog">
+                                   
+                                   <td>{{data.count}}</td>
+                                   <td>{{data.status}}</td>                           
+                                                                    
+                                 </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </mat-card>
+                  </div>
+            </div>  
+           
+         </div>
+
+ 

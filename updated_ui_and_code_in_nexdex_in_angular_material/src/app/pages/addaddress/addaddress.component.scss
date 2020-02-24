@@ -1,0 +1,56 @@
+#content {
+    padding: 20px;
+  }
+
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  #table{
+    overflow-y:scroll;
+    height:160px;
+    display:block;
+ }
+ ::-webkit-scrollbar {
+  display: none;
+}
+
+#table2{
+  overflow-y:scroll;
+  height:200px;
+  display:block;
+}
+
+#content1 {
+  width: 610px;
+}
+
+
+.example-viewport {
+  height: 200px;
+  width: 200px;
+  border: 1px solid black;
+}
+
+.example-item-detail {
+  height: 18px;
+}
+
+.example-alternate {
+  background: rgba(127, 127, 127, 0.3);
+}
+
+
+.example-container {
+  height: 400px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}

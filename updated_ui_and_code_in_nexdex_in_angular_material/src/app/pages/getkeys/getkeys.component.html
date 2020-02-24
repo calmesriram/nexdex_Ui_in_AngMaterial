@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-8">
+      <mat-card>
+        <h1>Keys</h1>
+        <form class="form" autocomplete="off" (ngSubmit)="onSubmit(c)" #c="ngForm">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="private key"  (ngModelChange)="validatePrivateKey();" (input)="validatePrivateKey();"
+            (keyup)="validatePrivateKey();"  id="privatekey" name="privatekey" [(ngModel)]="privatekey" ngModel
+              required>
+          </mat-form-field>
+
+          <br />
+          <button mat-raised-button color="primary" type="submit" [disabled]="c.invalid">Details</button>
+
+        </form>
+      </mat-card>
+    </div>
+    <div class="col-sm-4">
+    </div>
+  </div>
+</div>
+<br>
+<div class="container-fluid" *ngIf="show">
+  <div class="row">
+    <div class="col-sm-12">
+      <mat-card>
+        <dt>Publickey:</dt>
+        <dd>{{publickey}}</dd>
+        <dt>Address:</dt>
+        <dd>{{address}}</dd>
+      </mat-card>
+    </div>
+  </div>
+</div>

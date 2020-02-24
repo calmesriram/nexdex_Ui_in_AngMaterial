@@ -1,0 +1,44 @@
+<div id="content">
+    <mat-card>
+      <h1>SignUp</h1>
+        <form class="form" (ngSubmit)="onSubmit(c)" #c="ngForm" >
+        <mat-form-field class="full-width">
+          <input type =text matInput placeholder="Username" id="username" name="username" ngModel required>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+                <input type =password matInput placeholder="Password" id="password" name="password" ngModel required>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+                <input type =text matInput placeholder="contact" id="Contact" name="contact" ngModel required>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+                <input type =text matInput placeholder="Email" id="email" name="email" ngModel required>
+        </mat-form-field>
+
+        <!-- <mat-form-field class="full-width">
+                <input type =text matInput placeholder="country" id="country" name="country" ngModel required>
+        </mat-form-field> -->
+
+        <mat-form-field class="full-width">
+                <mat-label>Country</mat-label>
+                <mat-select name="country" ngModel required>
+                        <mat-option value="India">India</mat-option>
+                        <mat-option value="Russia">Russia</mat-option>
+                        <mat-option value="Pakistan">Pakistan</mat-option>
+                        <mat-option value="England">England</mat-option>
+                </mat-select>
+              
+              </mat-form-field>
+
+     
+
+        <br />
+        <button mat-raised-button type="submit" [disabled]="c.invalid">Submit</button>&nbsp;&nbsp;
+        <button  mat-raised-button color="primary"[routerLink]="['/login']">Cancel</button >
+  
+      </form>
+    </mat-card>
+  </div>

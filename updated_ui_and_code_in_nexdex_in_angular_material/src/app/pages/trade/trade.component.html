@@ -1,0 +1,179 @@
+<button mat-raised-button color="primary" (click)="openDialog();">orderbook Deposit</button><br><br>
+<div class="container-fluid">
+    <mat-card style="height:230px;overflow-y:scroll;">
+        <div class="row">
+            <div class="col-sm-3" *ngFor="let data of order_book_balance|keyvalue;index as i;">
+                <!-- <div class="card bg-info"> -->
+                <div class="card">
+                    <div class="card-header text-center text-white" style="color:#673ab7;background-color:#673ab7;">
+                        {{ data.key }}<br>
+                        <small class="card-text" style=" font-weight: bold;">
+                            Balance
+                        </small>
+                        <span>
+                            <font size="4"> {{data.value.available_balance}} </font>
+                        </span>
+                    </div>
+                    <div class="card-body text-center" style="color:#673ab7">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <small class="card-text">
+                                    IN Deposit
+                                </small><br>
+
+                                <p>
+                                    <font size="4"> {{ data.value.in_deposit }} </font>
+                                </p>
+                            </div>
+                            <div class="col-sm-4">
+                                <small class="card-text">
+                                    IN Trading
+                                </small><br>
+
+                                <p>
+                                    <font size="4"> {{ data.value.in_trading }}</font>
+                                </p>
+                            </div>
+                            <div class="col-sm-4">
+                                <small class="card-text">
+                                    IN Withdraw
+                                </small><br>
+                                <p>
+                                    <font size="4"> {{ data.value.in_withdraw }}</font>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div><br>
+            </div><br>
+        </div>
+    </mat-card><br>
+    <div class="row">
+        <div class="col-sm-6">
+            <mat-card>
+                <mat-subtitle class="badge badge-primary">Withdraw Request</mat-subtitle>
+                <mat-vertical-stepper #stepper>
+                    <mat-step [stepControl]="firstFormGroup">
+                        <form [formGroup]="firstFormGroup">
+                            <ng-template matStepLabel>Enter Your Privatekey</ng-template>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Enter the Privatekey" (input)="getpub_address_escorw();"
+                                    [(ngModel)]="privatekeydetail2" formControlName="privatekey" required>
+                            </mat-form-field>
+                            <div class="example-button-row">
+                                <button mat-raised-button color="primary" matStepperNext>Proceed</button>
+                            </div>
+                        </form>
+
+                    </mat-step>
+                    <mat-step [stepControl]="firstFormGroup">
+                        <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit()">
+                            <ng-template matStepLabel>Select zkaddress</ng-template>
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Select Assert Address</mat-label>
+                                <mat-select placeholder="Select AssetAddress" formControlName="zkaddress" required>
+                                    <mat-option *ngFor="let item of escrow_acc_det | keyvalue" [value]="item">
+                                        {{ item.value.symbol }}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="number" placeholder="Enter the Amount" formControlName="amount"
+                                    required>
+                            </mat-form-field>
+                            <div class="example-button-row">
+                                <button mat-raised-button matStepperPrevious>Back</button>
+                                <button mat-raised-button color="primary" matStepperNext>Withdraw</button>
+                                <button mat-raised-button color="warn" (click)="stepper.reset()">Reset</button>
+                            </div>
+                        </form>
+                    </mat-step>
+                    <!-- <mat-step>
+                        <ng-template matStepLabel>Done</ng-template>
+                        You are now done.
+                        <div class="example-button-row">
+                            <button mat-raised-button matStepperPrevious>Back</button>
+                            <button mat-raised-button color="warn" (click)="stepper.reset()">Reset</button>
+                        </div>
+                    </mat-step> -->
+                </mat-vertical-stepper>
+            </mat-card>
+        </div>
+        <div class="col-sm-6">
+            <mat-card>
+                <mat-subtitle class="badge badge-info">withdraw transaction info</mat-subtitle><br><br>         
+
+
+                <div class="example-container mat-elevation-z8">
+                    <table matSortActive="no" matSort mat-table [dataSource]="dataSource_array"
+                        class="table-striped table-hover">
+
+                        <ng-container matColumnDef="position">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> S.No. </th>
+                            <td mat-cell *matCellDef="let element;index as i;"> {{i+1}}. </td>
+                        </ng-container>
+
+
+                        <ng-container matColumnDef="Address">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
+                            <td mat-cell *matCellDef="let element"> {{element.user_address}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Symbol">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </th>
+                            <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                        </ng-container>
+
+
+                        <ng-container matColumnDef="Amount">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+                            <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Action">
+                            <th mat-header-cell *matHeaderCellDef> Action </th>
+                            <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary"
+                                    (click)="openDialogwithdraw(element);">Submit</button>
+                            </td>
+                        </ng-container>
+
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                </div>
+                <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator> -->
+            </mat-card>
+        </div>
+    </div>
+</div>
+
+
+<!-- <mat-table [dataSource]="dataSource_array" matSort matSortActive="no">
+    
+    <ng-container matColumnDef="position">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> S.No. </mat-header-cell>
+        <mat-cell *matCellDef="let element;index as i;"> {{i+1}} </mat-cell>
+    </ng-container>
+
+    
+    <ng-container matColumnDef="Address">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Address </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.user_address}} </mat-cell>
+    </ng-container>
+
+    
+    <ng-container matColumnDef="Amount">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Amount </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.amount}} </mat-cell>
+    </ng-container>
+
+    
+    <ng-container matColumnDef="Symbol">
+      <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table> -->

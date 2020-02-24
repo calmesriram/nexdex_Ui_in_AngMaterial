@@ -1,0 +1,101 @@
+<mat-sidenav mode="over" [(opened)]="isOpen" (keydown)="sidenav.close()" (click)="sidenav.close()" #sidenav class="sidenav">
+
+  <!-- <img [src]="angularImage"> -->
+  <div class="menu-link"></div><br><br><br><br>
+  <div class="menu-link">
+      <button mat-button routerLink="/addaddress" (click)="sidenav.close()">
+        <mat-icon class="about">account_circle</mat-icon>
+        <span>Add Details</span>
+      </button>
+    <!-- <button mat-button routerLink="/getkeys" (click)="sidenav.close()">
+      <mat-icon class="about">account_circle</mat-icon>
+      <span>Getkeys</span>
+    </button> -->
+    <button mat-button routerLink="/approve" (click)="sidenav.close()">
+      <mat-icon class="about">account_balance_wallet</mat-icon>
+      <span>Approve</span>
+    </button>
+    <button mat-button routerLink="/joinsplit" (click)="sidenav.close()">
+      <mat-icon class="about">transfer_within_a_station</mat-icon>
+      <span>Transfer</span>
+    </button>
+    <button mat-button routerLink="/bilateral" (click)="sidenav.close()">
+      <mat-icon class="about">swap_horiz</mat-icon>
+      <span>Exchange Asset</span>
+    </button>
+    <button mat-button routerLink="/verification" (click)="sidenav.close()">
+      <mat-icon class="about">assignment_late</mat-icon>
+      <span>Note Verification</span>
+    </button>
+    <button mat-button routerLink="/mint" (click)="sidenav.close()">
+
+      <mat-icon class="about">offline_bolt</mat-icon>
+      <span>Mint</span>
+    </button>
+     <button mat-button routerLink="/trade" (click)="sidenav.close()">
+      <mat-icon  class="about">trending_up</mat-icon>
+      <span>Trade</span>
+    </button>
+    <!-- <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>Item 1</button>
+  <button mat-menu-item>Item 2</button>
+</mat-menu> -->
+    <!-- <button mat-button routerLink="/trade" (click)="sidenav.close()">
+      <mat-icon  class="about">trending_up</mat-icon>
+      <span>Trade</span>
+    </button> -->
+    <!-- <button mat-button routerLink="/newjoinsplit" (click)="sidenav.close()">
+      <mat-icon class="about">swap_horiz</mat-icon>
+      <span>NEW Joinsplit</span>
+    </button> -->
+    <!-- <hr>
+    <button mat-button (click)="onLogout()" (click)="sidenav.close()">
+      <mat-icon class="about">exit_to_app</mat-icon>
+      <span>Logout</span>
+    </button> -->
+
+
+  </div>
+
+</mat-sidenav>
+
+<mat-toolbar color="primary">
+
+  <span><a>
+      <app-titlecase-pipe></app-titlecase-pipe>
+    </a></span>
+
+  <!-- Sidenav activate -->
+  <div class="sidenav-content">
+    <button type="button" mat-icon-button (click)="sidenav.toggle();">
+      <mat-icon matTooltip="Menu"
+      aria-label="Button that displays a tooltip when focused or hovered over">menu</mat-icon>
+      
+    </button>
+  </div>
+
+  <!-- Menu -->
+  <span class="spacer"></span>    
+  <span class="spacer-light"></span>
+  <div>
+    <user-card name="User name" style="font-size:16px;"><small>{{user | uppercase}}</small></user-card>    
+  </div>  
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon  matTooltip="Account"
+    aria-label="Button that displays a tooltip when focused or hovered over" >fingerprint</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu" (click)="onLogout()" >
+    <button mat-menu-item  (click)="onLogout()">
+      <mat-icon class="about" (click)="onLogout()"  style="color:red">exit_to_app</mat-icon>
+      <span mat-button (click)="onLogout()" ><small  (click)="onLogout()">Logout</small></span>
+    </button>  
+  </mat-menu>
+  
+  <span class="spacer-light"></span>
+
+
+
+
+
+</mat-toolbar>

@@ -1,0 +1,49 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6">
+            <mat-card>                
+                <form class="form" autocomplete="off" (ngSubmit)="singature(pvt.value)" #c="ngForm">
+                    <mat-label>Add Address</mat-label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="private key" #pvt name="privatekey"
+                            (ngModelChange)="validatePrivateKey();" (input)="validatePrivateKey();"
+                            (keyup)="validatePrivateKey();" [(ngModel)]="validate_privatekey" ngModel required>
+                    </mat-form-field>
+                    <br />
+                    <button mat-raised-button type="submit" [disabled]="c.invalid" color="primary">Add</button>
+                </form>
+                <br>
+                <mat-spinner strokeWidth="3" style="margin:0 auto;" [diameter]="20" *ngIf="loader"></mat-spinner>
+                <br>
+            </mat-card>
+        </div>
+        <div class="col-sm-6">
+            <mat-card>                
+                <div id="table2" class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>  
+                                <tr>
+                                        <th>Address</th>
+                                        <th *ngIf="listaddress_headers.length == '0'"> -- </th>
+                                        <th *ngIf="listaddress_headers.length == '0'"> -- </th>
+                                        <th *ngFor="let items of listaddress_headers;">
+                                            {{items}}                                         
+                                        </th>                                        
+                                    </tr>                                                         
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let items of listaddress | keyvalue">
+                                <td>{{items.value.address }}</td>
+                                <td *ngIf="(items.value.totalbalance | json) == '{}'">0.00</td>
+                                <td *ngIf="(items.value.totalbalance | json) == '{}'">0.00</td>
+                                <td *ngFor="let subitems of items.value.totalbalance | keyvalue">
+                                    {{subitems.value.zkAssetAddress }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>
