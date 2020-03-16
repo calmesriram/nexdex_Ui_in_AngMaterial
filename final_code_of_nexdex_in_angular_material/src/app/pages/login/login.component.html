@@ -1,0 +1,32 @@
+<mat-card>
+        <mat-card-title>Login</mat-card-title>
+  <mat-card-content>
+    <form class="form"  (ngSubmit)="onSubmit(c)" #c="ngForm" >
+      <p>
+        <mat-form-field>
+          <input  type="text" matInput placeholder="username" id="username" name="username"  ngModel required>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <input  type="password" matInput placeholder="password" id="password" name="password" autocomplete="on" ngModel required>
+        </mat-form-field>
+      </p>
+
+      <!-- <p *ngIf="error" class="error">
+        {{ error }}
+      </p> -->
+
+      <div style="text-align: center" class="example-button-row">          
+        <button mat-raised-button color="primary"  type="submit" [disabled]="c.invalid">Login</button>&nbsp;&nbsp;            
+        <button  mat-raised-button color="primary"[routerLink]="['/register']">Register</button >
+      </div>
+      <!-- <div class="button">
+                  <button mat-raised-button type="submit" [disabled]="c.invalid">Login</button>           
+      </div> -->
+
+    </form>
+  </mat-card-content>
+</mat-card>
+      

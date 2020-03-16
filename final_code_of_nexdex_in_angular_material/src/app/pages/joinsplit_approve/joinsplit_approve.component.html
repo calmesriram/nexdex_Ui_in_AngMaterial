@@ -1,0 +1,56 @@
+<div id="content">
+  <div class="row">
+    <div class="col-sm-12">    
+      <mat-card>
+        <h3>Approve Notes</h3>
+        <form class="form" autocomplete="off" (ngSubmit)="onSubmit(c)" #c="ngForm" >
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Enter your privateKey" name="privateKey" (input)="validatePrivateKey();" (keyup)="validatePrivateKey();" [(ngModel)]="privatekey" ngModel required>
+          </mat-form-field>
+          <!-- <div style="text-align: center" class="example-button-row">          
+            <button mat-raised-button color="primary"  type="submit" [disabled]="c.invalid">Approve</button>&nbsp;&nbsp;
+          </div> -->
+          <div class="button-row">
+            <button strokeWidth="3" type="submit" [disabled]="!btndisable" mat-raised-button color="primary">
+              Approve
+              <mat-icon>
+                <mat-spinner *ngIf="loader" color="accent" diameter="20">
+                </mat-spinner>
+              </mat-icon>
+            </button>
+          </div>
+        </form>
+        <br >
+        <!-- <mat-spinner strokeWidth="3" style="margin:0 auto;" [diameter]="20" *ngIf="loader"></mat-spinner> -->
+      </mat-card>
+    </div>
+  </div>
+  <br />
+  <br />
+  <div class="row">
+    <div class="col-sm-12">    
+      <mat-card>
+        <h3>Balance Info</h3>
+        <div id="table2" class="table-responsive">
+          <table class="table table-striped" style="text-align: center;">
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Total Count</th>
+                <th>Pending Count</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of balance | keyvalue">
+                <td>{{data.value.symbol}}</td>
+                <td>{{data.value.count}}</td>
+                <td>{{data.value.pending_count}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>
+

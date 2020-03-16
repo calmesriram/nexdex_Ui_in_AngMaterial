@@ -1,0 +1,69 @@
+<!-- <div id="content">
+    <mat-card>
+      <h1>Note Verification</h1>     
+    </mat-card>
+</div> -->
+<div id="content">
+  <div class="row">
+    <div class="col-sm-12">    
+      <mat-card>
+        <h3>Note Verification</h3>
+        <form class="form" autocomplete="off" (ngSubmit)="onSubmit(c)" #c="ngForm" >
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Note Hash" name="notehash" ngModel required>
+          </mat-form-field>
+          <div style="text-align: center" class="example-button-row">          
+            <button mat-raised-button color="primary"  type="submit" [disabled]="c.invalid">Verify</button>&nbsp;&nbsp;
+          </div>
+        </form>
+      </mat-card>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-sm-6">    
+        <mat-card *ngIf="showServerDetails">
+            <h3>Server Records</h3>
+            <dl style="overflow: hidden;">
+                <dt>Note Owner</dt>
+                <dd><a href="https://ropsten.etherscan.io/address/{{ServerDetails.owner}}" target="_blank"> {{ServerDetails.owner}} </a></dd>
+
+                <dt>Asset Hash</dt>
+                <dd><a href="https://ropsten.etherscan.io/address/{{ServerDetails.zkAssetAddress}}" target="_blank">{{ ServerDetails.zkAssetAddress }}</a></dd>
+
+                <dt>Note Count</dt>
+                <dd>{{ServerDetails.count}}</dd>
+                
+                <dt>Trasaction Recipt</dt>
+                <dd><a href="https://ropsten.etherscan.io/tx/{{ServerDetails.txRecipt}}" target="_blank">Transaction Info</a></dd>
+
+            </dl>
+        </mat-card>
+      </div>
+      <div class="col-sm-6">    
+          <mat-card *ngIf="showServerDetails">
+              <h3>BlockChain Records</h3>
+              <dl style="overflow: hidden;">
+                  <dt>Note Owner</dt>
+                  <dd><a href="https://ropsten.etherscan.io/address/{{BlockChainDetails.noteOwner}}" target="_blank"> {{BlockChainDetails.noteOwner}} </a></dd>
+              
+                  <dt>Note Status</dt>
+                  <dd *ngIf="BlockChainDetails.status == '1'"> <span class="badge badge-success">Active</span></dd>
+                  <dd *ngIf="BlockChainDetails.status == '2'"> <span class="badge badge-danger">Destroyed</span> </dd>
+              
+                  <dt>Created On</dt>
+                  <dd>{{ BlockChainDetails.createdOn * 1000 | date:'yyyy-MM-dd HH:mm:ss' }}</dd>
+
+                  <dt *ngIf="BlockChainDetails.status == '2'">Destroyed On</dt>
+                  <dd *ngIf="BlockChainDetails.status == '2'">{{ BlockChainDetails.destroyedOn * 1000 | date:'yyyy-MM-dd HH:mm:ss' }}</dd>
+
+                  <dt>Count From ViewingKey </dt>
+                  <dd> {{ ViewingKeyDetails.v_count }} </dd>
+
+                  <dt>NoteHash From ViewingKey </dt>
+                  <dd> {{ ViewingKeyDetails.v_noteHash }} </dd>
+              </dl>
+          </mat-card>
+        </div>
+  </div>
+</div>

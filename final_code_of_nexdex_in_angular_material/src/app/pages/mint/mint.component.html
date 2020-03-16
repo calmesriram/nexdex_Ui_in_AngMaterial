@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-8">
+      <mat-card>
+        <h1>Mint</h1>
+        <form class="form" autocomplete="off" (ngSubmit)="mint(f.value)" #f="ngForm">
+          <mat-form-field class="example-full-width">
+            <mat-label>Select Assert Address</mat-label>
+            <mat-select name="zkAssetAddress" ngModel required>
+              <mat-option *ngFor="let item of zkAssetAddress" [value]="item">
+                {{ item.zkaddress }} || {{ item.symbol }} || {{ item.total_minted }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Private Key" name="privateKey" ngModel required>
+          </mat-form-field>
+          <br>
+          <mat-form-field class="example-full-width">
+            <input type="number" min="0" matInput placeholder="Mint Count" name="minting_count" ngModel required>
+          </mat-form-field>
+          <br>
+          <div class="button-row">
+            <button strokeWidth="3" type="submit" [disabled]="f.invalid" mat-raised-button color="primary">
+              Mint
+              <mat-icon>
+                <mat-spinner  *ngIf="loaderformint" color="accent" diameter="20">
+                </mat-spinner>
+              </mat-icon>
+            </button>
+          </div>
+          <!-- <button mat-raised-button type="submit" [disabled]="f.invalid">Mint</button> -->
+        </form>
+        <!-- <br> -->
+        <!-- <mat-spinner strokeWidth="3" style="margin:0 auto;" [diameter]="20" ></mat-spinner> -->
+      </mat-card>
+    </div>
+    <div class="col-sm-4">
+    </div>
+  </div>
+</div>

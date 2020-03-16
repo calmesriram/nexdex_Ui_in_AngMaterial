@@ -1,0 +1,105 @@
+<div id="content">
+    <h4>Transfer Note's</h4>
+    <mat-card>
+      <mat-horizontal-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+          <form [formGroup]="firstFormGroup" autocomplete="off" (ngSubmit)="onSubmit(firstFormGroup,stepper)">
+            <ng-template matStepLabel>Fill out your PrivateKey</ng-template>
+            <mat-form-field class="example-full-width">
+              <input matInput  placeholder="PrivateKey" formControlName="privateKey" (input)="privatekeyvalidation()" [(ngModel)]="privatekeydetails" required>
+            </mat-form-field>
+            <div>
+              <!-- <button mat-raised-button color="primary" type="submit" [disabled]="!detbool">Details</button> -->
+              <button mat-raised-button color="primary" type="submit">Details</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup">
+          <mat-card>
+            <dl style="overflow: hidden;">
+              <dt>Publickey:</dt>
+              <dd>{{account.publicKey}}</dd>
+              <dt>Address:</dt>
+              <dd>{{account.address}}</dd>
+            </dl>
+          </mat-card>
+          <br />
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Confirm Your Details</ng-template>
+              <mat-checkbox formControlName="secondCtrl" required >I Agree Proceed</mat-checkbox>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="thirdFormGroup">
+          <div class="row">
+              <form [formGroup]="thirdFormGroup" autocomplete="off" (ngSubmit)="onSubmitTx(thirdFormGroup,stepper)">
+                <div *ngIf="data.orderbook_deposit">
+                <ng-template matStepLabel>Enter Transaction Details</ng-template>
+                <mat-form-field class="example-full-width">
+                  <mat-label>Select Assert Address</mat-label>
+                  <mat-select placeholder="Select AssetAddress" formControlName="zkAssetAddress" required>
+                    <mat-option *ngFor="let item of user_balance | keyvalue" [value]="item">
+                      {{ item.value.symbol }} <span class="badge badge-success" style="margin-left: 50px;"> Balance : {{ item.value.count }}</span> <span class="badge badge-warning" style="margin-left: 50px;"> Pending : {{ item.value.pending_count }}</span>
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                  <input type="number" min="0" matInput placeholder="Enter count needs to be transfer" formControlName="count" required>
+                </mat-form-field>
+                </div>
+                
+                <div>
+                  <!-- <button mat-raised-button color="primary" type="submit" [disabled]="thirdFormGroup.invalid">Transfer</button> -->
+                  
+                  <div class="button-row" *ngIf="data.orderbook_deposit">
+                      <button mat-raised-button color="primary" matStepperPrevious>Back</button> &nbsp;
+                      <button strokeWidth="3" type="submit" [disabled]="thirdFormGroup.invalid" mat-raised-button color="primary">
+                          Transfer
+                        <mat-icon>
+                          <mat-spinner  *ngIf="loader" color="accent" diameter="20">
+                          </mat-spinner>
+                        </mat-icon>
+                      </button>
+                    </div>
+                    <div class="button-row" *ngIf="data.orderbook_withdraw">
+                      <button mat-raised-button color="primary" matStepperPrevious>Back</button> &nbsp;
+                      <button strokeWidth="3" type="submit" mat-raised-button color="primary">
+                          Transfer
+                        <mat-icon>
+                          <mat-spinner  *ngIf="loader" color="accent" diameter="20">
+                          </mat-spinner>
+                        </mat-icon>
+                      </button>
+                    </div>
+  
+                </div>
+              </form>
+            </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          <div layout="row" layout-align="center center" style="text-align: center;">
+            <div class="col-sm-12">
+              You are now done.
+            </div>
+            <div class="col-sm-12">
+              <img width="10%" height="10%" src="https://raw.githubusercontent.com/arunsybex/images/master/5d4d82ec574a788542d8e1e9_success-2-once.gif" />
+            </div>
+            <br>
+            <div class="col-sm-12">
+              <h6><a href={{explorer_url}} target="_blank" >Click here for your Tx Details</a></h6>
+            </div>
+          </div>
+          <div>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+      <br />
+      <br />
+      <!-- <mat-spinner strokeWidth="3" style="margin:0 auto;" [diameter]="20" *ngIf="loader"></mat-spinner> -->
+    </mat-card>
+  </div>

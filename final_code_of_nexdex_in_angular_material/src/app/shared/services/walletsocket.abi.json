@@ -1,0 +1,716 @@
+[
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "approver",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "activated",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "appIntegrator",
+          "type": "address"
+        }
+      ],
+      "name": "addAuthorizedAddress",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "version",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "appIntegrator",
+          "type": "address"
+        }
+      ],
+      "name": "removeAuthorizedAddress",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "tradableAssets",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "authorized",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "_verifierAddr",
+          "type": "address"
+        },
+        {
+          "name": "_zkAssetHandlerAddress",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "signer",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "IsValidSignature",
+          "type": "bool"
+        }
+      ],
+      "name": "SingatureValidated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "makerOrderHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "name": "takerOrderHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "OrderFilled",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "caller",
+          "type": "address"
+        }
+      ],
+      "name": "InvalidIntegration",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "_assetAddr",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "_currency",
+          "type": "string"
+        }
+      ],
+      "name": "AddedZkAsset",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "zkAsset",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "noteHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "NoteCreated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "target",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "caller",
+          "type": "address"
+        }
+      ],
+      "name": "LogAuthorizedAddressAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "target",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "caller",
+          "type": "address"
+        }
+      ],
+      "name": "LogAuthorizedAddressRemoved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "oldApprover",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "newApprover",
+          "type": "address"
+        }
+      ],
+      "name": "LogApproverChanged",
+      "type": "event"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "killExchange",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "updateOwner",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_tokenAddresses",
+          "type": "address[]"
+        },
+        {
+          "name": "_allow",
+          "type": "bool[]"
+        }
+      ],
+      "name": "updateTradableSecurityTokens",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_currency",
+          "type": "string"
+        }
+      ],
+      "name": "createZkAsset",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_assetAddress",
+          "type": "address"
+        },
+        {
+          "name": "_noteHash",
+          "type": "bytes32"
+        },
+        {
+          "name": "_signWalletSocket",
+          "type": "bytes"
+        },
+        {
+          "name": "_signZkAssetHandler",
+          "type": "bytes"
+        },
+        {
+          "name": "_proofData",
+          "type": "bytes"
+        }
+      ],
+      "name": "approveNoteSpending",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_assetAddress",
+          "type": "address"
+        },
+        {
+          "name": "_noteHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getNoteOwner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_verifierAddr",
+          "type": "address"
+        },
+        {
+          "name": "_zkAssetHandler",
+          "type": "address"
+        }
+      ],
+      "name": "updateExConfig",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_msgHash",
+          "type": "bytes32"
+        },
+        {
+          "name": "v",
+          "type": "uint8"
+        },
+        {
+          "name": "r",
+          "type": "bytes32"
+        },
+        {
+          "name": "s",
+          "type": "bytes32"
+        },
+        {
+          "name": "_signer",
+          "type": "address"
+        }
+      ],
+      "name": "isOrderSigned",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_msgHash",
+          "type": "bytes32"
+        },
+        {
+          "name": "v",
+          "type": "uint8"
+        },
+        {
+          "name": "r",
+          "type": "bytes32"
+        },
+        {
+          "name": "s",
+          "type": "bytes32"
+        }
+      ],
+      "name": "recoverSignerAddr",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "assetAddr",
+          "type": "address[2]"
+        },
+        {
+          "name": "noteHashes",
+          "type": "bytes32[2]"
+        },
+        {
+          "name": "orderAddresses",
+          "type": "address[2]"
+        },
+        {
+          "name": "expirationTime",
+          "type": "uint256"
+        }
+      ],
+      "name": "getOrderHashZkAssetSwap",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "secToken",
+          "type": "address"
+        },
+        {
+          "name": "zkAsset",
+          "type": "address"
+        },
+        {
+          "name": "secTokenIds",
+          "type": "uint256[]"
+        },
+        {
+          "name": "noteHash",
+          "type": "bytes32"
+        },
+        {
+          "name": "orderAddresses",
+          "type": "address[2]"
+        },
+        {
+          "name": "expirationTime",
+          "type": "uint256"
+        }
+      ],
+      "name": "getOrderHashSecTokenZkAssetSwap",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_ZkAsset",
+          "type": "address"
+        },
+        {
+          "name": "_inputNoteHashes",
+          "type": "bytes32[]"
+        },
+        {
+          "name": "_outputNoteHashes",
+          "type": "bytes32[]"
+        },
+        {
+          "name": "_sender",
+          "type": "address"
+        },
+        {
+          "name": "_receiver",
+          "type": "address"
+        }
+      ],
+      "name": "getTransferHashZkAssetOneWay",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_ZkAsset",
+          "type": "address"
+        },
+        {
+          "name": "_inputNoteHashes",
+          "type": "bytes32[]"
+        },
+        {
+          "name": "_outputNoteHashes",
+          "type": "bytes32[]"
+        },
+        {
+          "name": "_proofData",
+          "type": "bytes"
+        },
+        {
+          "name": "_noteSignatures",
+          "type": "bytes"
+        },
+        {
+          "name": "_sender",
+          "type": "address"
+        },
+        {
+          "name": "_receiver",
+          "type": "address"
+        },
+        {
+          "name": "_v",
+          "type": "uint8"
+        },
+        {
+          "name": "_bytesData",
+          "type": "bytes32[4]"
+        }
+      ],
+      "name": "zkAssetOneWay",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_securityToken",
+          "type": "address"
+        },
+        {
+          "name": "_ZkAsset",
+          "type": "address"
+        },
+        {
+          "name": "_securityTokenIds",
+          "type": "uint256[]"
+        },
+        {
+          "name": "_proofData",
+          "type": "bytes"
+        },
+        {
+          "name": "_noteSignatures",
+          "type": "bytes"
+        },
+        {
+          "name": "_noteHashes",
+          "type": "bytes32[2]"
+        },
+        {
+          "name": "_orderAddresses",
+          "type": "address[2]"
+        },
+        {
+          "name": "_expirationTime",
+          "type": "uint256"
+        },
+        {
+          "name": "_v",
+          "type": "uint8[2]"
+        },
+        {
+          "name": "_bytesData",
+          "type": "bytes32[8]"
+        }
+      ],
+      "name": "zkAssetWithSecurityToken",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_makerAsset",
+          "type": "address"
+        },
+        {
+          "name": "_takerAsset",
+          "type": "address"
+        },
+        {
+          "name": "_noteHashes",
+          "type": "bytes32[4]"
+        },
+        {
+          "name": "_proofData",
+          "type": "bytes"
+        },
+        {
+          "name": "_orderAddresses",
+          "type": "address[2]"
+        },
+        {
+          "name": "_expirationTime",
+          "type": "uint256"
+        },
+        {
+          "name": "_v",
+          "type": "uint8[2]"
+        },
+        {
+          "name": "_bytesData",
+          "type": "bytes32[8]"
+        }
+      ],
+      "name": "zkAssetSwap",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ]

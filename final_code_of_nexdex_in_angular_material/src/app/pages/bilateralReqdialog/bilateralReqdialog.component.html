@@ -1,0 +1,58 @@
+<div  (keydown)="test($event);">
+<div class="row">
+  <div class="col-md-12">
+      <div class="add-title">
+          <mat-card-title>Approve Bilateral</mat-card-title>
+        </div>
+  </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+      <mat-card>
+          <div class="table-responsive">
+              <table class="table table-bordered ">
+                  <thead>
+                    <tr>
+                      <th>Asking User</th> <th> {{bilateral_data.maker_address}} </th>
+                    </tr>
+                    <tr>
+                      <th>Asking Symbol</th> <th> {{bilateral_data.taker_symbol}} </th>
+                    </tr>
+                    <tr>
+                      <th>Asking Count</th> <th> {{bilateral_data.maker_ask_note.count}} </th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+        </mat-card>
+    </div>
+</div>
+<br/>
+<div class="row">
+  <div class="col-md-12">
+      <form *ngIf="bilateral_data.maker_status == 1 && bilateral_data.taker_status == 0" class="form" (ngSubmit)="onSubmit(c)" #c="ngForm" >
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Your PrivateKey"  name="taker_privateKey" (ngModelChange)="validatePrivateKey();"
+          (input)="validatePrivateKey();" (keyup)="validatePrivateKey();" required [(ngModel)]="validate_privatekey" ngModel>
+        </mat-form-field>
+        <div class="form-inline">
+        <div style="text-align:start" class="example-button-row">                    
+          <button strokeWidth="3" mat-raised-button color="primary" class="Update-btn"   type="submit"  [disabled]="c.invalid">
+            BILATERAL REQUEST ACCEPT
+            <mat-icon>
+              <mat-spinner  *ngIf="Api.biloader" color="accent" diameter="20">
+              </mat-spinner>
+            </mat-icon>
+          </button>&nbsp;&nbsp;
+        </div>
+        <div style="text-align:end" class="example-button-row">          
+          <button mat-raised-button color="warn" class="Update-btn"(click)="cancelBitrequestList();"  type="button" >BILATERAL REQUEST REJECT</button>&nbsp;&nbsp;
+        </div>
+      </div>
+      </form>
+      <button mat-raised-button type="button" class="Discard-btn" (click)="openDialog()">Cancel</button>
+  </div>  
+</div>
+</div>
+
+

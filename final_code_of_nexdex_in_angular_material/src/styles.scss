@@ -1,0 +1,41 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber';
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+
+body {
+    background-color: #f7f7f7;
+}
+
+/* Tablet format and lower */
+@media only screen and (max-width: 1024px) {
+
+}
+
+/* Mobile format and lower */
+@media only screen and (max-width: 768px) {
+
+}
+
+/* Mobile format landscape (wide) */
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+
+}
+
+/* Mobile format portrait (small) */
+@media only screen and (max-width: 320px) {
+
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.green-snackbar {
+    
+    background: forestgreen;
+}
+
+.red-snackbar {
+    background: darkred;
+}  
+
+
+

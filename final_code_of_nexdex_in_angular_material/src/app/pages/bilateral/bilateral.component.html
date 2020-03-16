@@ -1,0 +1,168 @@
+<div class="row" id="content">
+  <div class="col-sm-4">
+    <mat-card>
+      <h3>BILATERAL SWAP</h3>
+      <mat-card-subtitle>
+        <div *ngFor="let zkBalance of totalBalance" class="row">
+          <div class="col-sm-3">
+            {{ zkBalance.symbol || "--" }}
+          </div>
+          <div class="col-sm-3">
+            {{ zkBalance.zkAssetAddress}}
+          </div>
+        </div>
+      </mat-card-subtitle>
+      <mat-form-field class="example-full-width">
+        <mat-label>Select Address</mat-label>
+        <mat-select [(ngModel)]="selectedValue" (ngModelChange)="specificaddressDetails();" name="food">
+          <mat-option *ngFor="let i of alladdress_user" [value]="i.address">
+            {{i.address}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Select Assert Address</mat-label>
+        <mat-select [(ngModel)]="selectedZk" (ngModelChange)="showBilateralAdd();" name="food">
+          <mat-option *ngFor="let item of zkObject | keyvalue" [value]="item">
+            {{ item.key }} || {{ item.value.symbol }} || {{ item.value.zkAssetAddress }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-card>
+    <br>
+    <mat-card *ngIf="showBilateral">
+      <form class="form" autocomplete="off" (ngSubmit)="onSubmit(c)" #c="ngForm">
+        <mat-form-field class="example-full-width">
+          <input matInput type="number" min="0" placeholder="Bid Amount" name="bid_amount" ngModel required>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput type="number" min="0" placeholder="Requesting Amount" name="req_amount" ngModel required>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Your PrivateKey" name="bid_privateKey" ngModel required>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Select User Name</mat-label>
+          <mat-select name="req_username" ngModel (ngModelChange)="showUserAdd($event);" required>
+            <mat-option *ngFor="let item of users | keyvalue" [value]="item">
+              {{ item.key }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Select User Address</mat-label>
+          <mat-select name="req_useraddress" ngModel required>
+            <mat-option *ngFor="let item of users_address_arr" [value]="item">
+              {{ item }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Select Assert Address</mat-label>
+          <mat-select name="req_zkAssetAddress" ngModel required>
+            <mat-option *ngFor="let item of zkAddress" [value]="item">
+              {{ item.symbol }} || {{ item.zkaddress }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div style="text-align: center" class="example-button-row">
+          <button strokeWidth="3" mat-raised-button color="primary" class="Update-btn"   type="submit"  [disabled]="c.invalid">
+            BILATERAL REQUEST
+            <mat-icon>
+              <mat-spinner  *ngIf="Api.bilatermakerloader" color="accent" diameter="20">
+              </mat-spinner>
+            </mat-icon>
+          </button>&nbsp;&nbsp;
+          <!-- <button mat-raised-button color="primary" type="submit" [disabled]="c.invalid">BILATERAL
+            REQUEST</button>&nbsp;&nbsp; -->
+        </div>
+      </form>
+      <!-- <br>
+      <mat-spinner strokeWidth="3" style="margin:0 auto;" [diameter]="20" *ngIf="Api.loader"></mat-spinner>
+      <br> -->
+    </mat-card>
+  </div>
+
+
+  <!-- <div class="button-row">  
+  <button strokeWidth="3" mat-raised-button color="primary" class="Update-btn"   type="submit"  [disabled]="c.invalid">
+    BILATERAL REQUEST
+    <mat-icon>
+      <mat-spinner  *ngIf="!loader" color="accent" diameter="20">
+      </mat-spinner>
+    </mat-icon>
+  </button>
+</div> -->
+
+
+  <div class="col-sm-8">
+    <mat-card>
+      <mat-subtitle class="badge badge-info">BILATERAL Approve</mat-subtitle><br><br>
+    
+    
+      <div class="example-container mat-elevation-z8">
+        <table matSortActive="no" matSort mat-table [dataSource]="dataSource_array" class="table-striped table-bordered table-hover">          
+          <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef class="text-center"> S.No. </th>
+            <td mat-cell *matCellDef="let element;index as i;" class="text-center" (click)="request_approve(element);"> {{i+1}}. </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Bidding User" >
+            <th mat-header-cell *matHeaderCellDef class="text-center"> USER </th>
+            <td mat-cell *matCellDef="let element"class="text-center"  (click)="request_approve(element);"> {{element.maker_address}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="Bidding Symbol" >
+            <th mat-header-cell *matHeaderCellDef class="text-center"> SYMBOL </th>
+            <td mat-cell *matCellDef="let element" class="text-center" (click)="request_approve(element);"> {{element.taker_symbol}} </td>
+          </ng-container>    
+    
+          <ng-container matColumnDef="Bidding Count">
+            <th mat-header-cell *matHeaderCellDef class="text-center"> COUNT </th>
+            <td mat-cell *matCellDef="let element"class="text-center" (click)="request_approve(element);"> {{element.maker_ask_note.count}} </td>
+          </ng-container>
+    
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </mat-card>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<mat-card>
+  <mat-card-title>Bilateral Approve</mat-card-title>
+  <div class="table-responsive">
+    <table class="table table-bordered ">
+      <thead>
+        <tr>
+          <th>Bidding User</th>
+          <th>Bidding Symbol</th>
+          <th>Bidding Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reqs of bit_reqs" (click)="request_approve(reqs);">
+          <td>{{reqs.maker_address}}</td>
+          <td>{{reqs.taker_symbol}}</td>
+          <td>{{reqs.maker_ask_note.count}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</mat-card>
+
+<mat-spinner strokeWidth="3" style="margin:0 auto;" [diameter]="20" *ngIf="loader"></mat-spinner> -->
